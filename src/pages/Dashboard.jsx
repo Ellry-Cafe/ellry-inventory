@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 
 export default function Dashboard() {
   const [profile, setProfile] = useState(null);
+  // eslint-disable-next-line no-unused-vars
   const [userId, setUserId] = useState(null);
   const [loading, setLoading] = useState(true);
   const [inventory, setInventory] = useState([]);
@@ -14,6 +15,7 @@ export default function Dashboard() {
   const [isCategoryModalOpen, setIsCategoryModalOpen] = useState(false);
   const [newCategory, setNewCategory] = useState('');
   const [quantity, setQuantity] = useState(1);
+  // eslint-disable-next-line no-unused-vars
   const [error, setError] = useState('');
   const [filterCategory, setFilterCategory] = useState('');
   const [brands, setBrands] = useState([]);
@@ -192,8 +194,15 @@ const fetchSuppliers = async (userId) => {
 
 // Delete item
 const deleteItem = async (id) => {
+    if (!id) {
+      console.error('❌ No ID provided for deletion');
+      return;
+    }
+  
     const confirmDelete = window.confirm("Are you sure you want to delete this item?");
     if (!confirmDelete) return;
+  
+    console.log('🗑 Deleting item with ID:', id);
   
     const { error } = await supabase
       .from('inventories')
@@ -201,13 +210,13 @@ const deleteItem = async (id) => {
       .eq('id', id);
   
     if (error) {
-      console.error('❌ Error deleting item:', error.message);
+      console.error('❌ Supabase delete error:', error.message);
       return;
     }
   
-    // Update the UI
     setInventory((prevItems) => prevItems.filter((item) => item.id !== id));
   };
+  
   
   
 
@@ -236,6 +245,7 @@ const filteredInventory = filterCategory
     fetchCategories(); 
     fetchBrands(); 
     fetchSuppliers();   
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
 
