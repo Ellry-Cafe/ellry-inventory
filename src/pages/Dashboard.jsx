@@ -218,10 +218,6 @@ const deleteItem = async (id) => {
   };
   
   
-  
-
-
-  
 // Filtered Inventory
 const filteredInventory = filterCategory
   ? inventory.filter((item) => item.category === filterCategory)
@@ -291,66 +287,66 @@ const formattedTime = `${currentTime.toLocaleDateString('en-US', {
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col items-center py-8 px-4">
 
-        {/* Header */}
-       <div className="flex items-center justify-between bg-white p-4 rounded shadow mb-6 w-full">
-            {/* Left: Welcome */}
-            <div className="flex items-center gap-4">
-            <img
-                src="/logo.png" 
-                alt="Logo"
-                className="w-12 h-12 object-contain"
-                />
-                <h2 className="text-xl font-bold">Ellry Cafe Inventory</h2>
-                
-            </div>
+      {/* Header */}
+      <div className="flex items-center justify-between bg-white p-4 rounded shadow mb-6 w-full">
+          {/* Left: Welcome */}
+          <div className="flex items-center gap-4">
+          <img
+              src="/logo.png" 
+              alt="Logo"
+              className="w-12 h-12 object-contain"
+              />
+              <h2 className="text-xl font-bold">Ellry Cafe Inventory</h2>
+              
+          </div>
 
-            {/* Right: Action Buttons */}
-            <div className="flex items-center gap-4">
+          {/* Right: Action Buttons */}
+          <div className="flex items-center gap-4">
 
-            <button onClick={() => navigate('/checklist')}
-            className="bg-sky-700 hover:bg-sky-800 text-white px-4 py-2 rounded"
-            >
-            Grocery Checklist
-            </button>
+          <button onClick={() => navigate('/checklist')}
+          className="bg-sky-700 hover:bg-sky-800 text-white px-4 py-2 rounded text-sm "
+          >
+          Grocery Checklist
+          </button>
 
-            <button type="button" onClick={() => setIsCategoryModalOpen(true)}
-                className="bg-teal-600 hover:bg-teal-700 text-white px-4 py-2 rounded flex">
-                Add Category</button>
+          <button type="button" onClick={() => setIsCategoryModalOpen(true)}
+              className="bg-teal-600 hover:bg-teal-700 text-white px-4 py-2 rounded flex text-sm">
+              Add Category</button>
 
-            <button type="button" onClick={() => setIsBrandModalOpen(true)}
-                                    className="bg-teal-600 hover:bg-teal-700 text-white px-4 py-2 rounded">Add Brand</button>
-            <button type="button" onClick={() => setIsSupplierModalOpen(true)}
-                                    className="bg-teal-600 hover:bg-teal-700 text-white px-4 py-2 rounded">Add Supplier</button>
+          <button type="button" onClick={() => setIsBrandModalOpen(true)}
+                                  className="bg-teal-600 hover:bg-teal-700 text-white px-4 py-2 rounded text-sm">Add Brand</button>
+          <button type="button" onClick={() => setIsSupplierModalOpen(true)}
+                                  className="bg-teal-600 hover:bg-teal-700 text-white px-4 py-2 rounded text-sm">Add Supplier</button>
 
-            <button className="bg-teal-600 hover:bg-teal-700 text-white px-4 py-2 rounded flex">
-            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 4h3a1 1 0 0 1 1 1v15a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h3m0 3h6m-3 5h3m-6 0h.01M12 16h3m-6 0h.01M10 3v4h4V3h-4Z"/>
-            </svg>
-            Inventory Report
-            </button>
+          <button className="bg-teal-600 hover:bg-teal-700 text-white px-4 py-2 rounded flex text-sm">
+          <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 4h3a1 1 0 0 1 1 1v15a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h3m0 3h6m-3 5h3m-6 0h.01M12 16h3m-6 0h.01M10 3v4h4V3h-4Z"/>
+          </svg>
+          Inventory Report
+          </button>
 
-            <button onClick={handleLogout} className="bg-red-600 hover:bg-red-700 flex text-white px-4 py-2 rounded">
-            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12H4m12 0-4 4m4-4-4-4m3-4h2a3 3 0 0 1 3 3v10a3 3 0 0 1-3 3h-2"/>
-            </svg> Logout
-            </button>
-        </div>
-        </div>
+          <button onClick={handleLogout} className="bg-red-600 hover:bg-red-700 flex text-white px-4 py-2 rounded text-sm">
+          <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12H4m12 0-4 4m4-4-4-4m3-4h2a3 3 0 0 1 3 3v10a3 3 0 0 1-3 3h-2"/>
+          </svg> Logout
+          </button>
+      </div>
+      </div>   
 
 
         <div className="w-full max-w-7xl mx-auto bg-white p-8 rounded shadow">
             
             <div className="flex flex-col md:flex-row gap-10">
-                <div className="md:w-1/3 w-full">
+                <div className="md:w-1/5 w-full">
                     <h2 className="text-xl font-bold capitalize">Welcome, {profile.full_name || profile.username}!</h2>
-                    <p className="text-sm text-gray-500  mb-8">{formattedTime}</p>
+                    <p className="text-sm text-gray-500  mb-3">{formattedTime}</p>
 
                 </div>
-                <div className="md:w-2/3 w-full">
-                    <div className="mb-4">
-                        <label className="mb-1 mr-3 font-medium">Filter by Category</label>
+                <div className="md:w-4/5 w-full">
+                    <div className="mb-0">
+                        <label className="mb-1 mr-3 font-medium text-sm">Filter by Category</label>
                         <select
-                            className="border p-2 rounded w-full max-w-xs"
+                            className="border p-2 rounded w-full max-w-xs text-sm"
                             value={filterCategory}
                             onChange={(e) => setFilterCategory(e.target.value)}
                         >
@@ -368,13 +364,13 @@ const formattedTime = `${currentTime.toLocaleDateString('en-US', {
 
             <div className="flex flex-col md:flex-row gap-10">
                 {/* Left Column - Form */}
-                <div className="md:w-1/3 w-full">
+                <div className="md:w-1/5 w-full">
                     <h3 className="text-lg font-semibold mb-4">Add Item</h3>
-                    <form onSubmit={addItem} className="flex flex-col gap-4">
+                    <form onSubmit={addItem} className="flex flex-col gap-2">
                         <input
                         type="text"
                         placeholder="Item name"
-                        className="p-3 border rounded"
+                        className="p-3 border rounded text-sm"
                         value={itemName}
                         onChange={(e) => setItemName(e.target.value)}
                         required
@@ -384,7 +380,7 @@ const formattedTime = `${currentTime.toLocaleDateString('en-US', {
                         <select
                         value={category}
                         onChange={(e) => setCategory(e.target.value)}
-                        className="p-2 border rounded"
+                        className="p-2 border rounded text-sm"
                         required
                         >
                         <option value="">Select Category</option>
@@ -399,7 +395,7 @@ const formattedTime = `${currentTime.toLocaleDateString('en-US', {
                         <select
                         value={brand}
                         onChange={(e) => setBrand(e.target.value)}
-                        className="p-2 border rounded"
+                        className="p-2 border rounded text-sm"
                         required
                         >
                         <option value="">Select Brand</option>
@@ -415,7 +411,7 @@ const formattedTime = `${currentTime.toLocaleDateString('en-US', {
                         <select
                         value={supplier}
                         onChange={(e) => setSupplier(e.target.value)}
-                        className="p-2 border rounded"
+                        className="p-2 border rounded text-sm"
                         required
                         >
                         <option value="">Select Supplier</option>
@@ -430,7 +426,7 @@ const formattedTime = `${currentTime.toLocaleDateString('en-US', {
                         <input
                         type="number"
                         placeholder="Quantity"
-                        className="p-3 border rounded"
+                        className="p-3 border rounded text-sm"
                         value={quantity}
                         min="1"
                         onChange={(e) => setQuantity(parseInt(e.target.value))}
@@ -442,11 +438,11 @@ const formattedTime = `${currentTime.toLocaleDateString('en-US', {
                         placeholder="Price"
                         value={price}
                         onChange={(e) => setPrice(e.target.value)}
-                        className="w-full px-3 py-2 border rounded mb-2"
+                        className="w-full px-3 py-2 border rounded text-sm"
                         />
 
 
-                        <button className="w-full bg-sky-700 hover:bg-sky-800 text-white font-medium py-3 rounded flex items-center justify-center gap-2">
+                        <button className="w-full bg-sky-700 hover:bg-sky-800 text-white font-medium py-3 rounded flex items-center justify-center gap-2 text-sm">
                         <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9V4a1 1 0 0 0-1-1H8.914a1 1 0 0 0-.707.293L4.293 7.207A1 1 0 0 0 4 7.914V20a1 1 0 0 0 1 1h4M9 3v4a1 1 0 0 1-1 1H4m11 6v4m-2-2h4m3 0a5 5 0 1 1-10 0 5 5 0 0 1 10 0Z"/>
                         </svg>
@@ -456,7 +452,7 @@ const formattedTime = `${currentTime.toLocaleDateString('en-US', {
                 </div>
 
                 {/* Right Column - Table */}
-                <div className="md:w-2/3 w-full">
+                <div className="md:w-4/5 w-full">
                 <h3 className="text-lg font-semibold mb-4">Items</h3>
 
                 <div className="overflow-x-auto">

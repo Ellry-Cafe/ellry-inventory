@@ -108,9 +108,72 @@ const GroceryChecklist = () => {
 
 
 
-  return (
-    <div className="p-6">
-      <div className="flex justify-between items-center mb-4">
+  return (   
+    <div className="min-h-screen bg-gray-100 flex flex-col items-center py-8 px-4">
+
+        {/* Header */}
+        {/* Header */}
+<div className="flex flex-col md:flex-row md:items-center md:justify-between bg-white p-4 rounded shadow mb-6 w-full gap-4">
+  {/* Left: Logo & Title */}
+  <div className="flex items-center gap-4">
+    <img
+      src="/logo.png"
+      alt="Logo"
+      className="w-12 h-12 object-contain"
+    />
+    <h2 className="text-xl font-bold">
+      Ellry Cafe Grocery Checklist
+    </h2>
+  </div>
+
+  {/* Right: Navigation */}
+  {lowStockItems.length > 0 && (
+    <nav className="flex flex-wrap justify-center md:justify-end gap-2 text-sm font-medium">
+      <button
+        onClick={() => navigate('/dashboard')}
+        className="bg-teal-600 hover:bg-teal-700 text-white px-4 py-2 rounded transition"
+      >
+        Dashboard
+      </button>
+
+      <button
+        onClick={exportToPDF}
+        className="bg-teal-600 hover:bg-teal-700 text-white px-4 py-2 rounded transition"
+      >
+        Export PDF
+      </button>
+
+      <CSVLink
+        data={csvData}
+        filename="grocery-checklist.csv"
+        className="bg-teal-600 hover:bg-teal-700 text-white px-4 py-2 rounded transition"
+      >
+        Export CSV
+      </CSVLink>
+
+      <button
+        onClick={saveAllChanges}
+        className="bg-cyan-600 hover:bg-cyan-700 text-white px-4 py-2 rounded transition"
+      >
+        Save All
+      </button>
+    </nav>
+  )}
+</div>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+      {/* <div className="flex justify-between items-center mb-4">
         <h2 className="text-2xl font-bold flex items-center gap-2">
           🛒 Grocery Checklist
         </h2>
@@ -143,7 +206,7 @@ const GroceryChecklist = () => {
             </button>
           </div>
         )}
-      </div>
+      </div> */}
 
       {lowStockItems.length > 0 ? (
         <table className="min-w-full bg-white shadow rounded border text-sm">
