@@ -1,7 +1,0 @@
-services:
-  - type: web
-    name: ellry-inventory
-    env: node
-    buildCommand: npm install && npm run build
-    startCommand: npm run preview
-    staticPublishPath: dist
