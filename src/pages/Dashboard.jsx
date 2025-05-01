@@ -208,10 +208,17 @@ const deleteItem = async (id) => {
   
     console.log('🗑 Deleting item with ID:', id);
   
-    const { error } = await supabase
-      .from('inventories')
-      .delete()
-      .eq('id', id);
+    const { error } = 
+      await supabase
+        .from('stock_logs')
+        .delete()
+        .eq('inventory_id', id);
+      await supabase
+        .from('inventories')
+        .delete()
+        .eq('id', id);
+      
+
   
     if (error) {
       console.error('❌ Supabase delete error:', error.message);

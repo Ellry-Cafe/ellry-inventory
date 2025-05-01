@@ -46,6 +46,7 @@
     ]
   },
   "devDependencies": {
+    "build": "vite build",
     "tailwindcss": "^3.4.17"
   }
 }
