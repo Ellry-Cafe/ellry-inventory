@@ -2,6 +2,7 @@
   "name": "ellry-inventory",
   "version": "0.1.0",
   "private": true,
+  "homepage": ".",
   "dependencies": {
     "@supabase/supabase-js": "^2.49.4",
     "@testing-library/dom": "^10.4.0",
