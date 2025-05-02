@@ -46,7 +46,7 @@ const fetchProfile = async () => {
   
     const { data, error: profileError } = await supabase
       .from('profiles')
-      .select('username, full_name')
+      .select('username')
       .eq('id', user.id)
       .single();
   
@@ -62,30 +62,44 @@ const fetchProfile = async () => {
 
 
 // Fetch Inventory
-const fetchInventory = async () => {
-  const { data: userData, error: userError } = await supabase.auth.getUser();
+// const fetchInventory = async () => {
+//   const { data: userData, error: userError } = await supabase.auth.getUser();
   
-  if (userError || !userData?.user?.id) {
-    console.error("❌ Cannot fetch inventory, user not found.");
-    return;
-  }
+//   if (userError || !userData?.user?.id) {
+//     console.error("❌ Cannot fetch inventory, user not found.");
+//     return;
+//   }
 
-  const userId = userData.user.id;
-  console.log("📦 Fetching inventory for user:", userId);
+//   const userId = userData.user.id;
+//   console.log("📦 Fetching inventory for user:", userId);
 
+//   const { data, error } = await supabase
+//     .from('inventories')
+//     .select('*')
+//     .eq('user_id', userId)
+//     .order('created_at', { ascending: false }); // ✅ SORT BY DATE ASCENDING
+
+//   if (error) {
+//     console.error("❌ Fetch error:", error);
+//   } else {
+//     console.log("✅ Fetched inventory:", data);
+//     setInventory(data);
+//   }
+// };
+
+const fetchInventory = async () => {
   const { data, error } = await supabase
     .from('inventories')
     .select('*')
-    .eq('user_id', userId)
-    .order('created_at', { ascending: false }); // ✅ SORT BY DATE ASCENDING
+    .order('created_at', { ascending: false }); 
 
   if (error) {
     console.error("❌ Fetch error:", error);
   } else {
-    console.log("✅ Fetched inventory:", data);
     setInventory(data);
   }
 };
+
 
 
 
@@ -243,7 +257,7 @@ const deleteItem = async (id) => {
     const { data, error } = await supabase
       .from('inventories')
       .select('*')
-      .eq('user_id', user.id)
+      // .eq('user_id', user.id)
       .ilike('item_name', `%${query}%`); // case-insensitive search
   
     if (error) {
@@ -410,7 +424,11 @@ const filteredInventory = filterCategory
                   <div className="flex flex-col md:flex-row md:w-full gap-4 py-2">
 
                     <div className="w-full">
-                      <h2 className="text-xl font-bold capitalize">Welcome, {profile.full_name || profile.username}!</h2>
+                      <h2 className="text-xl font-bold capitalize">
+                      {loading
+                        ? 'Loading...'
+                        : `Welcome, ${profile?.username || 'Guest'}!`}
+                      </h2>
                       <p className="text-sm text-gray-500">{formattedTime}</p>
                     </div>
 
@@ -418,7 +436,6 @@ const filteredInventory = filterCategory
                       
                       {/* Filter */}
                       <div className="w-full md:w-1/2">
-                        {/* <label className="mb-5 mr-3 font-medium text-sm">Filter by Category</label> */}
                           <select
                               className="border p-2 rounded w-full text-sm"
                               value={filterCategory}

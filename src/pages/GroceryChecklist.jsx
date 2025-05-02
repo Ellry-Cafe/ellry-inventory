@@ -23,13 +23,13 @@ const GroceryChecklist = () => {
         const { data, error } = await supabase
           .from('inventories')
           .select('*')
-          .eq('user_id', user.id);
+          .order('created_at', { ascending: false }); 
 
-        if (!error) {          
-          setInventory(data);
-        } else {
-          console.error('Fetch Error:', error.message);
-        }
+          if (error) {
+            console.error("❌ Fetch error:", error);
+          } else {
+            setInventory(data);
+          }
       }
     };
     
@@ -73,7 +73,7 @@ const GroceryChecklist = () => {
     const { data } = await supabase
       .from('inventories')
       .select('*')
-      .eq('user_id', user.id);
+      .order('created_at', { ascending: false }); 
     
       toast.success('Stocks successfully updated!');  
     setInventory(data);
