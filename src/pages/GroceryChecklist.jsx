@@ -67,6 +67,7 @@ const GroceryChecklist = () => {
   
     // Refresh inventory after save
     const {
+      // eslint-disable-next-line no-unused-vars
       data: { user },
     } = await supabase.auth.getUser();
   
