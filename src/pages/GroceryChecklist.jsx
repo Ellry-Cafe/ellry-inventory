@@ -166,77 +166,78 @@ const GroceryChecklist = () => {
           )}
         </div>
 
+      <div className="overflow-x-auto w-full max-w-[900px]">
+        {lowStockItems.length > 0 ? (
+          <table className="w-full text-xs text-left border">
+            <thead className="bg-gray-100 text-left font-semibold text-gray-700">
+              <tr>
+                <th className="px-2 py-2">✓</th>
+                <th className="px-1 py-2">Qty</th>              
+                <th className="px-5 py-2">Item</th>    
+                <th className="px-3 py-2">Brand</th>          
+                <th className="px-4 py-2 hidden md:table-cell">Supplier</th>
+                <th className="px-2 py-2">Price</th>              
+              </tr>
+            </thead>
+            <tbody className='text-xs'>
+              {lowStockItems
+              .slice()
+              .sort((a, b) => a.item_name.localeCompare(b.item_name))
+              .map((item) => {
+                const qty =
+                  editedQuantities[item.id] !== undefined
+                    ? editedQuantities[item.id]
+                    : item.quantity;
 
-      {lowStockItems.length > 0 ? (
-        <table className="min-w-full bg-white shadow rounded border text-xs">
-          <thead className="bg-gray-100 text-left font-semibold text-gray-700">
-            <tr>
-              <th className="px-4 py-2">✓</th>
-              <th className="px-4 py-2">Quantity</th>              
-              <th className="px-4 py-2">Item</th>    
-              <th className="px-4 py-2">Brand</th>          
-              <th className="px-4 py-2">Supplier</th>
-              <th className="px-4 py-2">Price</th>              
-            </tr>
-          </thead>
-          <tbody className='text-xs'>
-            {lowStockItems
-             .slice()
-             .sort((a, b) => a.item_name.localeCompare(b.item_name))
-            .map((item) => {
-              const qty =
-                editedQuantities[item.id] !== undefined
-                  ? editedQuantities[item.id]
-                  : item.quantity;
-
-              return (
-                <tr
-                  key={item.id}
-                  className={`hover:bg-gray-50 ${
-                    marked.includes(item.id) ? 'line-through text-gray-400' : ''
-                  }`}
-                >
-                  <td className="px-4 py-2 border-b">
-                    <input
-                      type="checkbox"
-                      checked={marked.includes(item.id)}
-                      onChange={() => handleCheckboxChange(item.id)}
-                    />
-                  </td>
-                  <td className="px-4 py-1 border-b">
-                    <div className="flex items-center gap-2">
-                      <button
-                        className="px-1 py-0 bg-gray-200 rounded hover:bg-gray-300 text-xs"
-                        disabled={qty <= 0}
-                        onClick={() =>
-                          handleQuantityChange(item.id, qty - 1)
-                        }
-                      >
-                        -
-                      </button>
-                      <span className='px-1 py-0'>{qty}</span>
-                      <button
-                        className="px-1 py-0 bg-gray-200 rounded hover:bg-gray-300 text-xs"
-                        onClick={() => handleQuantityChange(item.id, qty + 1)}
-                      >
-                        +
-                      </button>
-                    </div>
-                  </td>
-                  
-                  <td className="px-4 py-1 border-b">{item.item_name}</td>      
-                  <td className="px-4 py-1 border-b">{item.brand}</td>            
-                  <td className="px-4 py-1 border-b">{item.supplier}</td>
-                  <td className="px-4 py-1 border-b">₱{item.price}</td>
-                  
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
-      ) : (
-        <p className="text-gray-500 italic">All stocks are sufficient for now.</p>
-      )}
+                return (
+                  <tr
+                    key={item.id}
+                    className={`hover:bg-gray-50 ${
+                      marked.includes(item.id) ? 'line-through text-gray-400' : ''
+                    }`}
+                  >
+                    <td className="px-2 py-2 border-b">
+                      <input
+                        type="checkbox"
+                        checked={marked.includes(item.id)}
+                        onChange={() => handleCheckboxChange(item.id)}
+                      />
+                    </td>
+                    <td className="px-0 py-1 border-b">
+                      <div className="flex items-center">
+                        <button
+                          className="px-1 py-0 bg-gray-200 rounded hover:bg-gray-300 text-xs"
+                          disabled={qty <= 0}
+                          onClick={() =>
+                            handleQuantityChange(item.id, qty - 1)
+                          }
+                        >
+                          -
+                        </button>
+                        <span className='px-1 py-0'>{qty}</span>
+                        <button
+                          className="px-1 py-0 bg-gray-200 rounded hover:bg-gray-300 text-xs"
+                          onClick={() => handleQuantityChange(item.id, qty + 1)}
+                        >
+                          +
+                        </button>
+                      </div>
+                    </td>
+                    
+                    <td className="px-5 py-1 border-b">{item.item_name}</td>      
+                    <td className="px-3 py-1 border-b">{item.brand}</td>            
+                    <td className="px-4 py-1 border-b hidden md:table-cell">{item.supplier}</td>
+                    <td className="px-2 py-1 border-b">₱{item.price}</td>
+                    
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        ) : (
+          <p className="text-gray-500 italic">All stocks are sufficient for now.</p>
+        )}
+      </div>
     </div>
   );
 };

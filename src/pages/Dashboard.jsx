@@ -61,32 +61,6 @@ const fetchProfile = async () => {
   };
 
 
-// Fetch Inventory
-// const fetchInventory = async () => {
-//   const { data: userData, error: userError } = await supabase.auth.getUser();
-  
-//   if (userError || !userData?.user?.id) {
-//     console.error("❌ Cannot fetch inventory, user not found.");
-//     return;
-//   }
-
-//   const userId = userData.user.id;
-//   console.log("📦 Fetching inventory for user:", userId);
-
-//   const { data, error } = await supabase
-//     .from('inventories')
-//     .select('*')
-//     .eq('user_id', userId)
-//     .order('created_at', { ascending: false }); // ✅ SORT BY DATE ASCENDING
-
-//   if (error) {
-//     console.error("❌ Fetch error:", error);
-//   } else {
-//     console.log("✅ Fetched inventory:", data);
-//     setInventory(data);
-//   }
-// };
-
 const fetchInventory = async () => {
   const { data, error } = await supabase
     .from('inventories')
