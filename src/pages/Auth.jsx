@@ -5,6 +5,7 @@ export default function Auth() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [username, setUsername] = useState('');
+  const [full_name, setFullName] = useState('');
   const [isLogin, setIsLogin] = useState(true);
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState('');
@@ -27,29 +28,29 @@ export default function Auth() {
         email,
         password,
         options: {
-          data: { username },
+          data: { username, full_name },
         },
       });
 
       error = signUpError;
 
-      if (!error) {
-        const userId = data.user?.id;
-
-        if (userId) {
-          const { error: insertError } = await supabase.from('profiles').insert([
-            {
-              id: userId,
-              username,
-              email,
-            },
-          ]);
-
-          if (insertError) {
-            console.error('Error inserting into profiles:', insertError.message);
-          }
+      if (!error && data?.user) {
+        const { error: profileError } = await supabase.from('profiles').insert([
+          {
+            id: data.user.id, // match with auth.user id
+            email,
+            username,
+            full_name,
+          },
+        ]);
+      
+        if (profileError) {
+          console.error('❌ Failed to create profile:', profileError.message);
+        } else {
+          console.log('✅ Profile created in Supabase!');
         }
       }
+      
     }
 
     if (error) {
@@ -80,6 +81,15 @@ export default function Auth() {
               className="w-full mb-4 p-2 border border-gray-300 rounded"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
+              required
+            />
+
+            <input
+              type="text"
+              placeholder="Full Name"
+              className="w-full mb-4 p-2 border border-gray-300 rounded"
+              value={full_name}
+              onChange={(e) => setFullName(e.target.value)}
               required
             />
           </>
